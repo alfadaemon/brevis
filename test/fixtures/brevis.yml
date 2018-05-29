@@ -2,11 +2,6 @@
 #
 one:
   protocol: http
-  original_url: 'http://ruby-doc.org/stdlib-2.0.0/libdoc/uri/rdoc/URI.html#method-c-regexp'
+  original_url: 'http://www.google.com'
   slug: slug01
   clicks: 1
-
-two:
-  protocol: https
-  original_url: SecureURL
-  slug: slug02

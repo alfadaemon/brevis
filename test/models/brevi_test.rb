@@ -3,34 +3,25 @@ require 'uri'
 
 class BreviTest < ActiveSupport::TestCase
   test 'should not save the record if duplicated original_url' do
-    link = Brevi.new
-    link.original_url = 'UnsecureURL'
+    link = Brevi.new original_url: 'http://www.google.com'
     assert_not link.save
   end
 
   test 'should not save the record if duplicated slug' do
-    link = Brevi.new
-    link.slug = 'slug01'
+    link = Brevi.new slug: 'slug01'
     assert_not link.save
   end
 
-  test 'should increment clicks when updating' do
-    link = Brevi.first
-    count = link.clicks
-    link.increment! :clicks
-    assert_equal (count+1), link.clicks
-  end
-
-  test 'should generate slug with 6 characters before save' do
+  test 'should slug generator use only 6 alphanumeric characters' do
     link = Brevi.new
-    puts link
-    length = 0 || link.slug.length
-    assert_equal 6, length
+    link.generate_slug
+    regex = /[a-zA-Z0-9]{6}/
+    assert_match regex, link.slug
   end
 
   test 'should original_url contain at least one valid url' do
-    link = Brevi.new
-    uri = URI.extract('www.google.com' || link.original_url, ['http', 'https'])
+    link = Brevi.first
+    uri = URI.extract(link.original_url, ['http', 'https'])
     assert uri.length == 1
   end
 end
