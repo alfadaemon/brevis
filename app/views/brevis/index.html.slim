@@ -1,0 +1,27 @@
+h1 Listing brevis
+
+table
+  thead
+    tr
+      th Protocol
+      th Original url
+      th Slug
+      th Clicks
+      th
+      th
+      th
+
+  tbody
+    - @brevis.each do |brevi|
+      tr
+        td = brevi.protocol
+        td = brevi.original_url
+        td = brevi.slug
+        td = brevi.clicks
+        td = link_to 'Show', brevi
+        td = link_to 'Edit', edit_brevi_path(brevi)
+        td = link_to 'Destroy', brevi, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Brevi', new_brevi_path

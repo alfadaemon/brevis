@@ -1,0 +1,21 @@
+= form_for @brevi do |f|
+  - if @brevi.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@brevi.errors.count, "error")} prohibited this brevi from being saved:"
+      ul
+        - @brevi.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :protocol
+    = f.text_field :protocol
+  .field
+    = f.label :original_url
+    = f.text_field :original_url
+  .field
+    = f.label :slug
+    = f.text_field :slug
+  .field
+    = f.label :clicks
+    = f.number_field :clicks
+  .actions = f.submit

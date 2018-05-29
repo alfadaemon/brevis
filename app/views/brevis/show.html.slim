@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Protocol:
+  = @brevi.protocol
+p
+  strong Original url:
+  = @brevi.original_url
+p
+  strong Slug:
+  = @brevi.slug
+p
+  strong Clicks:
+  = @brevi.clicks
+
+=> link_to 'Edit', edit_brevi_path(@brevi)
+'|
+=< link_to 'Back', brevis_path
