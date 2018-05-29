@@ -1,13 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
+#
 one:
-  protocol: MyString
-  original_url: MyString
-  slug: MyString
+  protocol: http
+  original_url: 'http://ruby-doc.org/stdlib-2.0.0/libdoc/uri/rdoc/URI.html#method-c-regexp'
+  slug: slug01
   clicks: 1
 
 two:
-  protocol: MyString
-  original_url: MyString
-  slug: MyString
-  clicks: 1
+  protocol: https
+  original_url: SecureURL
+  slug: slug02
