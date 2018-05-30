@@ -1,6 +1,7 @@
 class Brevi < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
-  validates :original_url, presence: true, uniqueness: true
+  validates :original_url, presence: true, uniqueness: true, format: {
+    with: URI.regexp(%w(http https)), message: 'Bad url format'}
   before_validation :generate_slug
 
   def generate_slug

@@ -1,27 +1,24 @@
-h1 Listing brevis
+h1.display-4 Welcome to brevis
+- if notice
+  .alert.alert-warning = notice.html_safe
+== render 'form'
 
-table
-  thead
-    tr
-      th Protocol
-      th Original url
-      th Slug
-      th Clicks
-      th
-      th
-      th
-
-  tbody
-    - @brevis.each do |brevi|
+h1 Top 100 urls
+.table-responsive-sm
+  table.table.table-sm.table-hover.table-striped
+    caption Top 100 urls
+    thead.thead-dark
       tr
-        td = brevi.protocol
-        td = brevi.original_url
-        td = brevi.slug
-        td = brevi.clicks
-        td = link_to 'Show', brevi
-        td = link_to 'Edit', edit_brevi_path(brevi)
-        td = link_to 'Destroy', brevi, data: { confirm: 'Are you sure?' }, method: :delete
+        th Original url
+        th Short Link
+        th Uses
 
-br
+    tbody
+      - @brevis.each do |brevi|
+        tr
+          td = brevi.original_url
+          td = link_to brevi.slug, action: "show", slug: brevi.slug
+          td = brevi.clicks
+  br
 
-= link_to 'New Brevi', new_brevi_path
+  = link_to 'New Brevi', new_brevi_path, class: 'btn btn-primary'
