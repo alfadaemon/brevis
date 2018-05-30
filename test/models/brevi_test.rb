@@ -12,11 +12,17 @@ class BreviTest < ActiveSupport::TestCase
     assert_not link.save
   end
 
-  test 'should slug generator use only 6 alphanumeric characters' do
+  test 'should slug generator use only alphanumeric characters' do
     link = Brevi.new
     link.generate_slug
-    regex = /[a-zA-Z0-9]{4,}/
-    assert_match regex, link.slug
+    regex = /[^a-z^0-9]+/i
+    assert_no_match regex, link.slug
+  end
+
+  test 'should slug generator use 4 to unlimited alphanumeric characters' do
+    link = Brevi.new
+    link.generate_slug
+    assert link.slug.length >= 4
   end
 
   test 'should original_url contain at least one valid url' do
