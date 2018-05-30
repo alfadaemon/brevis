@@ -9,13 +9,15 @@ h1 Top 100 urls
     caption Top 100 urls
     thead.thead-dark
       tr
+        th Pos
         th Original url
         th Short Link
         th Uses
 
     tbody
-      - @brevis.each do |brevi|
+      - @brevis.each_with_index do |brevi, index|
         tr
+          td = index+1
           td = brevi.original_url
           td = link_to brevi.slug, action: "show", slug: brevi.slug
           td = brevi.clicks

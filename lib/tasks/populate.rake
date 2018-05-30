@@ -5,9 +5,10 @@ namespace :db do
 
     Rake::Task['db:reset'].invoke
 
-    120.times do
+    150.times do
       Brevi.create do |brevi|
         brevi.original_url = Faker::Internet.url
+        brevi.clicks = [1..1000].sample
       end
     end
     end

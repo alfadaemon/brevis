@@ -32,7 +32,7 @@ class BrevisController < ApplicationController
 
     respond_to do |format|
       if @brevi.save
-        format.html { redirect_to brevis_url, notice: "Your short link is <a href='#{root_url}#{@brevi.slug}'>#{root_url}/#{@brevi.slug}</a>"}
+        format.html { redirect_to brevis_url, notice: "Your short link is <a href='#{root_url}#{@brevi.slug}'>#{root_url}#{@brevi.slug}</a>"}
       else
         format.html { render :new }
       end
