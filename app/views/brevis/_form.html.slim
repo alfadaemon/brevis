@@ -1,12 +1,16 @@
-= form_for @brevi do |f|
+
+= form_for @brevi, :html => {:class => 'form-inline'} do |f|
   - if @brevi.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@brevi.errors.count, "error")} prohibited this brevi from being saved:"
-      ul
+      h2.alert.alert-danger = "#{pluralize(@brevi.errors.count, "error")} prohibited this brevi from being saved:"
+      ul.alert.alert-warning
         - @brevi.errors.full_messages.each do |message|
           li = message
+          - if message.include? 'Bad url format'
+            li = 'Did you forget to add the http:// or https:// ?'
 
-  .field
-    = f.label :original_url
-    = f.text_field :original_url
-  .actions = f.submit
+  .form-group.mx-md-3.mb-2
+    .form-control.form-control-lg
+      = f.text_field :original_url, size: 100, placeholder: 'Put your url here!'
+  .btn.btn-primary.mb-2
+    = f.submit 'Generate brevis', class: 'btn btn-primary'

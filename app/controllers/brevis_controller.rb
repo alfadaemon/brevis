@@ -4,14 +4,20 @@ class BrevisController < ApplicationController
   # GET /brevis
   # GET /brevis.json
   def index
-    @brevis = Brevi.all
+    @brevi = Brevi.new
+    @brevis = Brevi.limit(100).order(clicks: :desc)
   end
 
   # GET /brevis/1
   # GET /brevis/1.json
   def show
     @brevi = Brevi.find_by_slug params[:slug]
-    redirect_to @brevi.original_url
+    if @brevi
+      @brevi.increment! :clicks
+      redirect_to @brevi.original_url
+    else
+      redirect_to brevis_url, notice: 'There was an error redirecting.'
+    end
   end
 
   # GET /brevis/new
@@ -26,11 +32,9 @@ class BrevisController < ApplicationController
 
     respond_to do |format|
       if @brevi.save
-        format.html { redirect_to @brevi, notice: 'Brevi was successfully created.' }
-        format.json { render :show, status: :created, location: @brevi }
+        format.html { redirect_to brevis_url, notice: "Your short link is <a href='#{root_url}#{@brevi.slug}'>#{root_url}/#{@brevi.slug}</a>"}
       else
         format.html { render :new }
-        format.json { render json: @brevi.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,6 +48,6 @@ class BrevisController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def brevi_params
-    params.require(:brevi).permit(:protocol, :original_url, :slug, :clicks)
+    params.require(:brevi).permit(:original_url, :slug, :clicks)
   end
 end
