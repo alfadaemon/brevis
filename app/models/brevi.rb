@@ -1,7 +1,7 @@
 class Brevi < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
   validates :original_url, presence: true, uniqueness: true
-  before_create :generate_slug
+  before_validation :generate_slug
 
   def generate_slug
     chars = ['0'..'9', 'A'..'Z', 'a'..'z'].map{|range| range.to_a}.flatten

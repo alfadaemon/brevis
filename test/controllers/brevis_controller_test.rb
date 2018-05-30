@@ -17,32 +17,14 @@ class BrevisControllerTest < ActionDispatch::IntegrationTest
 
   test "should create brevi" do
     assert_difference('Brevi.count') do
-      post brevis_url, params: { brevi: { clicks: @brevi.clicks, original_url: @brevi.original_url, protocol: @brevi.protocol, slug: @brevi.slug } }
+      post brevis_url, params: { brevi: { original_url: @brevi.original_url } }
     end
 
     assert_redirected_to brevi_url(Brevi.last)
   end
 
-  test "should show brevi" do
-    get brevi_url(@brevi)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_brevi_url(@brevi)
-    assert_response :success
-  end
-
-  test "should update brevi" do
-    patch brevi_url(@brevi), params: { brevi: { clicks: @brevi.clicks, original_url: @brevi.original_url, protocol: @brevi.protocol, slug: @brevi.slug } }
-    assert_redirected_to brevi_url(@brevi)
-  end
-
-  test "should destroy brevi" do
-    assert_difference('Brevi.count', -1) do
-      delete brevi_url(@brevi)
-    end
-
-    assert_redirected_to brevis_url
+  test "should redirect to original_url" do
+    get brevi_url(@brevi.slug)
+    assert_redirected_to @brevi.original_url
   end
 end
