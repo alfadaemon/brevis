@@ -10,15 +10,13 @@ class BrevisController < ApplicationController
   # GET /brevis/1
   # GET /brevis/1.json
   def show
+    @brevi = Brevi.find_by_slug params[:slug]
+    redirect_to @brevi.original_url
   end
 
   # GET /brevis/new
   def new
     @brevi = Brevi.new
-  end
-
-  # GET /brevis/1/edit
-  def edit
   end
 
   # POST /brevis
@@ -37,35 +35,11 @@ class BrevisController < ApplicationController
     end
   end
 
-  # PATCH/PUT /brevis/1
-  # PATCH/PUT /brevis/1.json
-  def update
-    respond_to do |format|
-      if @brevi.update(brevi_params)
-        format.html { redirect_to @brevi, notice: 'Brevi was successfully updated.' }
-        format.json { render :show, status: :ok, location: @brevi }
-      else
-        format.html { render :edit }
-        format.json { render json: @brevi.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /brevis/1
-  # DELETE /brevis/1.json
-  def destroy
-    @brevi.destroy
-    respond_to do |format|
-      format.html { redirect_to brevis_url, notice: 'Brevi was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_brevi
-    @brevi = Brevi.find(params[:id])
+    @brevi = Brevi.find_by_slug(params[:slug])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
