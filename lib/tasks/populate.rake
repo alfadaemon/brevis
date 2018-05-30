@@ -8,7 +8,7 @@ namespace :db do
     150.times do
       Brevi.create do |brevi|
         brevi.original_url = Faker::Internet.url
-        brevi.clicks = [1..1000].sample
+        brevi.clicks = [*1..1000].sample
       end
     end
     end

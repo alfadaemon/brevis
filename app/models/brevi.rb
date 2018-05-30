@@ -6,11 +6,11 @@ class Brevi < ApplicationRecord
 
   def generate_slug
     chars = ['0'..'9', 'A'..'Z', 'a'..'z'].map{|range| range.to_a}.flatten
-    attempts = 2
+    attempts = 4
     self.slug = attempts.times.map{chars.sample}.join
     # Checks the DB to make sure the generated short_url above doesn't exist in the DB.
     until Brevi.find_by_slug(self.slug).nil? do
-      attempts+=1
+      attempts += 1
       self.slug = attempts.times.map{chars.sample}.join
     end
   end
