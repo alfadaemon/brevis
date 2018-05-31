@@ -3,10 +3,6 @@ namespace :db do
   task populate: :environment do
     require 'faker'
 
-    #if :environment == 'development' || :environment == 'test'
-    #  Rake::Task['db:reset'].invoke
-    #end
-
     150.times do
       Brevi.create do |brevi|
         brevi.original_url = Faker::Internet.url
