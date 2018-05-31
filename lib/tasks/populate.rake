@@ -3,9 +3,9 @@ namespace :db do
   task populate: :environment do
     require 'faker'
 
-    if :environment != 'production'
-      Rake::Task['db:reset'].invoke
-    end
+    #if :environment == 'development' || :environment == 'test'
+    #  Rake::Task['db:reset'].invoke
+    #end
 
     150.times do
       Brevi.create do |brevi|
@@ -13,5 +13,5 @@ namespace :db do
         brevi.clicks = [*1..1000].sample
       end
     end
-    end
+  end
 end
