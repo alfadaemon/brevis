@@ -3,7 +3,9 @@ namespace :db do
   task populate: :environment do
     require 'faker'
 
-    Rake::Task['db:reset'].invoke
+    if :environment != 'production'
+      Rake::Task['db:reset'].invoke
+    end
 
     150.times do
       Brevi.create do |brevi|

@@ -21,4 +21,9 @@ Things you may want to cover:
 
 * Deployment instructions
 
+    - Install heroku toolbelt on your machine.
+    - Once you you have installed, on a terminal run: heroku login
+    - It will ask you for your heroku credentials. (create an account if you haven't)
+    - 
+
 * ...
